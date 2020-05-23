@@ -32,6 +32,10 @@ const SocketConnection = () => {
     socket.current.emit('game state change', state)
   }
 
+  function setTeamName ({ teamId, teamName, roomName }) {
+    socket.current.emit('set team name', { teamId, teamName, roomName })
+  }
+
   const [roomState, setRoomState] = useSetState({
     users: null,
     userName: null,
@@ -41,7 +45,8 @@ const SocketConnection = () => {
     gameState: null,
     actions: {
       connectToRoom,
-      setGameState
+      setGameState,
+      setTeamName
     }
   })
 

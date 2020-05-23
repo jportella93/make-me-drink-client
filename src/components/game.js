@@ -13,9 +13,7 @@ const Game = () => {
   /* eslint-disable react/jsx-key */
   const gameStates = new Map([
     [WAITING_ROOM, <WaitingRoom />],
-    [MAKING_TEAMS, <MakingTeams />]
-    // [TEAM_START, <TeamStart />]
-    // [WAITING_QUESTION, <WaitingQuestion />]
+    [MAKING_TEAMS, <MakingTeams />],
     // [WAITING_ANSWER, <WaitingAnswer />]
     // [ANSWER_RESULT, <AnswerResult />]
     // [FINAL_RESULT, <FinalResult />]
