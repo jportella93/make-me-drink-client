@@ -12906,6 +12906,11 @@ urql@^1.9.7:
     "@urql/core" "^1.11.0"
     wonka "^4.0.9"
 
+use-state-object@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/use-state-object/-/use-state-object-1.1.0.tgz#c6e5918d840473428b2649afb67188e58a3d4516"
+  integrity sha512-7mPOZr9ynfCxuvBjEpbIh/TnorcIQjSumek++rQy17+0+tX2oYET1XGin1LbBmciwrZgRAGoNxHMW+j+HmUsnA==
+
 use@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/use/-/use-3.1.1.tgz#d50c8cac79a19fbc20f2911f56eb973f4e10070f"

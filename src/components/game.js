@@ -1,53 +1,16 @@
-import React, { useRef, useState, useEffect } from 'react'
-import socketIOClient from 'socket.io-client'
-const ENDPOINT = 'http://127.0.0.1:3000'
+import PropTypes from 'prop-types'
+import React, { useContext } from 'react'
+import { RoomContext } from './socketConnection'
 
-const Game = () => {
-  const [isConnectedToSocket, setConnectedToSocket] = useState(false)
-  const [roomName, setRoomName] = useState(null)
-  const [userName, setUserName] = useState(null)
-  const [users, setUsers] = useState(null)
-  const socket = useRef()
-
-  const createRoom = (e) => {
-    e.preventDefault()
-    const { roomName, userName } = e.target.elements
-    console.log('---->: createRoom -> e.target.elements', e.target.elements)
-    connectToSocket(roomName.value, userName.value)
-  }
-
-  const connectToSocket = (roomName, userName) => {
-    socket.current = socketIOClient(ENDPOINT, {
-      query: `roomName=${roomName}&userName=${userName}`
-    })
-
-    socket.current.on('connection confirmation',
-      ({ roomName, userName }) => {
-        console.log('---->: connectToSocket -> userName', userName)
-        console.log('---->: connectToSocket -> roomName', roomName)
-        setConnectedToSocket(true)
-        setRoomName(roomName)
-        setUserName(userName)
-      })
-
-    socket.current.on('room state', ({ users }) => {
-      console.log('---->: connectToSocket -> users', users)
-      setUsers(users)
-    })
-
-    socket.current.emit('connection confirmation')
-  }
-
-  useEffect(() => {
-    return () => {
-      socket.current.emit('disconnect')
-    }
-  }, [])
+const Game = ({ onCreateRoom }) => {
+  const {
+    users, userName, roomName, isConnected
+  } = useContext(RoomContext)
 
   return (
     <>
-      {!isConnectedToSocket &&
-        <form onSubmit={createRoom}>
+      {!isConnected &&
+        <form onSubmit={onCreateRoom}>
           <label htmlFor="roomName">Room name</label>
           <input type="text" id="roomName" required />
           <br/>
@@ -68,6 +31,10 @@ const Game = () => {
       }
     </>
   )
+}
+
+Game.propTypes = {
+  onCreateRoom: PropTypes.func.isRequired
 }
 
 export default Game
