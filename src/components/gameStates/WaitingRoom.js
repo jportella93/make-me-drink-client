@@ -13,7 +13,11 @@ const WaitingRoom = () => {
         <>
         Online users in room {roomName}:
           <ul>
-            {users.map(({ name, id }) => (<li key={id}>{name}</li>))}
+            {users.map(({ name, id, type }) => (
+              <li key={id}>
+                {name}{type === 'admin' && ' 👑'}
+              </li>
+            ))}
           </ul>
         </>
       }

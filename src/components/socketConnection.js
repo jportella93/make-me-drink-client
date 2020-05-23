@@ -12,6 +12,7 @@ const SocketConnection = () => {
   const [roomState, setRoomState] = useSetState({
     users: null,
     userName: null,
+    userType: null,
     roomName: null,
     isConnected: false,
     gameState: null
