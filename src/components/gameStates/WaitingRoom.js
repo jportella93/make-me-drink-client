@@ -4,7 +4,7 @@ import { MAKING_TEAMS } from '../../constants/gameStates'
 
 const WaitingRoom = () => {
   const {
-    users, userName, roomName, actions: { setGameState }
+    users, userName, userType, roomName, actions: { setGameState }
   } = useContext(RoomContext)
 
   return (
@@ -20,9 +20,17 @@ const WaitingRoom = () => {
               </li>
             ))}
           </ul>
-          <button onClick={() => setGameState(MAKING_TEAMS)}>
-          Start
-          </button>
+          {userType === 'admin'
+            ? (
+              <button onClick={() => setGameState(MAKING_TEAMS)}>
+              Start
+              </button>
+            )
+            : <p>
+            Waiting for {users.find(({ type }) => type === 'admin').name}{' '}
+            to start the game
+            </p>
+          }
         </>
       }
     </>
