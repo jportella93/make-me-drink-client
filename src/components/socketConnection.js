@@ -28,6 +28,10 @@ const SocketConnection = () => {
     socket.current.emit('connection confirmation')
   }
 
+  function setGameState (state) {
+    socket.current.emit('game state change', state)
+  }
+
   const [roomState, setRoomState] = useSetState({
     users: null,
     userName: null,
@@ -36,7 +40,8 @@ const SocketConnection = () => {
     isConnected: false,
     gameState: null,
     actions: {
-      connectToRoom
+      connectToRoom,
+      setGameState
     }
   })
 

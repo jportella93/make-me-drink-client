@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
-import { WAITING_ROOM } from '../constants/gameStates'
+import { WAITING_ROOM, MAKING_TEAMS } from '../constants/gameStates'
 import WaitingRoom from './gameStates/WaitingRoom'
+import MakingTeams from './gameStates/MakingTeams'
 import SelectRoom from './selectRoom'
 import { RoomContext } from './socketConnection'
 
@@ -11,8 +12,8 @@ const Game = () => {
 
   /* eslint-disable react/jsx-key */
   const gameStates = new Map([
-    [WAITING_ROOM, <WaitingRoom />]
-    // [MAKING_TEAMS, <MakingTeams />]
+    [WAITING_ROOM, <WaitingRoom />],
+    [MAKING_TEAMS, <MakingTeams />]
     // [TEAM_START, <TeamStart />]
     // [WAITING_QUESTION, <WaitingQuestion />]
     // [WAITING_ANSWER, <WaitingAnswer />]
