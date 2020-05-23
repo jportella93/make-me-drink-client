@@ -13,7 +13,8 @@ const SocketConnection = () => {
     users: null,
     userName: null,
     roomName: null,
-    isConnected: false
+    isConnected: false,
+    gameState: null
   })
 
   RoomContext = React.createContext(roomState)
@@ -35,9 +36,12 @@ const SocketConnection = () => {
 
     socket.current.on('room state', setRoomState)
 
+    socket.current.on('error', console.error)
+
     socket.current.emit('connection confirmation')
   }
 
+  console.log('---->: SocketConnection -> roomState', roomState)
   return <Game onCreateRoom={createRoom} />
 }
 

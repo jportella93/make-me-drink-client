@@ -1,36 +1,30 @@
 import PropTypes from 'prop-types'
 import React, { useContext } from 'react'
 import { RoomContext } from './socketConnection'
+import { WAITING_ROOM, SELECT_ROOM, MAKING_TEAMS, TEAM_START, WAITING_QUESTION, WAITING_ANSWER, ANSWER_RESULT, FINAL_RESULT } from '../constants/gameStates'
+import SelectRoom from './selectRoom'
+import WaitingRoom from './gameStates/WaitingRoom'
 
 const Game = ({ onCreateRoom }) => {
   const {
-    users, userName, roomName, isConnected
+    isConnected, gameState
   } = useContext(RoomContext)
 
-  return (
-    <>
-      {!isConnected &&
-        <form onSubmit={onCreateRoom}>
-          <label htmlFor="roomName">Room name</label>
-          <input type="text" id="roomName" required />
-          <br/>
-          <label htmlFor="userName">User name</label>
-          <input type="text" id="userName" required />
-          <br/>
-          <input type="submit" />
-        </form>
-      }
-      {userName && <h3>{userName}</h3>}
-      {users &&
-        <>
-        Online users in room {roomName}:
-          <ul>
-            {users.map(({ name, id }) => (<li key={id}>{name}</li>))}
-          </ul>
-        </>
-      }
-    </>
-  )
+  /* eslint-disable react/jsx-key */
+  const gameStates = new Map([
+    [WAITING_ROOM, <WaitingRoom />]
+    // [MAKING_TEAMS, <MakingTeams />]
+    // [TEAM_START, <TeamStart />]
+    // [WAITING_QUESTION, <WaitingQuestion />]
+    // [WAITING_ANSWER, <WaitingAnswer />]
+    // [ANSWER_RESULT, <AnswerResult />]
+    // [FINAL_RESULT, <FinalResult />]
+  ])
+  /* eslint-enable react/jsx-key */
+
+  return isConnected && gameState
+    ? gameStates.get(gameState)
+    : <SelectRoom onCreateRoom={onCreateRoom} />
 }
 
 Game.propTypes = {
