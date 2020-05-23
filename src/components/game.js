@@ -1,27 +1,34 @@
+import React, { useRef, useState } from 'react'
 import socketIOClient from 'socket.io-client'
-import React, { useRef, useState, useEffect } from 'react'
 const ENDPOINT = 'http://127.0.0.1:3000'
 
 const Game = () => {
-  const [response, setResponse] = useState('')
+  const [isConnectedToSocket, setConnectedToSocket] = useState(false)
   const socket = useRef()
 
-  useEffect(() => {
-    socket.current = socketIOClient(ENDPOINT)
-    socket.current.on('chat message', data => {
-      setResponse(data)
-    })
-  }, [])
+  const createRoom = (e) => {
+    e.preventDefault()
+    const { roomName } = e.target.elements
+    connectToSocket(roomName.value)
+  }
 
-  const emit = () => {
-    socket.current.emit('chat message', 'test message')
+  const connectToSocket = (roomName) => {
+    socket.current = socketIOClient(ENDPOINT)
+    socket.current.on('connection confirmation', () => {
+      setConnectedToSocket(true)
+    })
+
+    socket.current.emit('connection confirmation')
   }
 
   return (
-    <p>
-      <button onClick={emit}>submit</button>
-      {response}
-    </p>
+    <>
+      <form onSubmit={createRoom}>
+        <label htmlFor="roomName.value"></label>
+        <input id="roomName" />
+      </form>
+      {isConnectedToSocket ? 'Connected 💚' : 'Disconnected 🔻' }
+    </>
   )
 }
 
