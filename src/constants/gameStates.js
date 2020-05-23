@@ -1,4 +1,3 @@
-export const SELECT_ROOM = 'selectRoom'
 export const WAITING_ROOM = 'waitingRoom'
 export const MAKING_TEAMS = 'makingTeams'
 export const TEAM_START = 'teamStart'
