@@ -15,7 +15,7 @@ const MakingTeams = () => {
       if (!user) return
       partnerArray.push(user.name)
     })
-    return partnerArray.join(', ')
+    return partnerArray.join(' and ')
   }
 
   return (
