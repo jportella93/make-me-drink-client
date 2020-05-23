@@ -1,7 +1,7 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import socketIOClient from 'socket.io-client'
-import Game from './game'
 import useSetState from 'use-state-object'
+import Game from './game'
 const ENDPOINT = 'http://127.0.0.1:3000'
 
 let RoomContext = React.createContext({})
@@ -9,26 +9,12 @@ let RoomContext = React.createContext({})
 const SocketConnection = () => {
   const socket = useRef()
 
-  const [roomState, setRoomState] = useSetState({
-    users: null,
-    userName: null,
-    userType: null,
-    roomName: null,
-    isConnected: false,
-    gameState: null
-  })
-
-  RoomContext = React.createContext(roomState)
-
-  const createRoom = (e) => {
+  function connectToRoom (e) {
     e.preventDefault()
     const { roomName, userName } = e.target.elements
-    connectToSocket(roomName.value, userName.value)
-  }
 
-  const connectToSocket = (roomName, userName) => {
     socket.current = socketIOClient(ENDPOINT, {
-      query: `roomName=${roomName}&userName=${userName}`
+      query: `roomName=${roomName.value}&userName=${userName.value}`
     })
 
     socket.current.on('connection confirmation', (roomState) => {
@@ -42,8 +28,22 @@ const SocketConnection = () => {
     socket.current.emit('connection confirmation')
   }
 
+  const [roomState, setRoomState] = useSetState({
+    users: null,
+    userName: null,
+    userType: null,
+    roomName: null,
+    isConnected: false,
+    gameState: null,
+    actions: {
+      connectToRoom
+    }
+  })
+
+  RoomContext = React.createContext(roomState)
+
   console.log('---->: SocketConnection -> roomState', roomState)
-  return <Game onCreateRoom={createRoom} />
+  return <Game />
 }
 
 export { RoomContext }

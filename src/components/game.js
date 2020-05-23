@@ -1,11 +1,10 @@
-import PropTypes from 'prop-types'
 import React, { useContext } from 'react'
-import { RoomContext } from './socketConnection'
-import { WAITING_ROOM, SELECT_ROOM, MAKING_TEAMS, TEAM_START, WAITING_QUESTION, WAITING_ANSWER, ANSWER_RESULT, FINAL_RESULT } from '../constants/gameStates'
-import SelectRoom from './selectRoom'
+import { WAITING_ROOM } from '../constants/gameStates'
 import WaitingRoom from './gameStates/WaitingRoom'
+import SelectRoom from './selectRoom'
+import { RoomContext } from './socketConnection'
 
-const Game = ({ onCreateRoom }) => {
+const Game = () => {
   const {
     isConnected, gameState
   } = useContext(RoomContext)
@@ -24,11 +23,7 @@ const Game = ({ onCreateRoom }) => {
 
   return isConnected && gameState
     ? gameStates.get(gameState)
-    : <SelectRoom onCreateRoom={onCreateRoom} />
-}
-
-Game.propTypes = {
-  onCreateRoom: PropTypes.func.isRequired
+    : <SelectRoom />
 }
 
 export default Game

@@ -1,9 +1,13 @@
-import PropTypes from 'prop-types'
-import React from 'react'
+import React, { useContext } from 'react'
+import { RoomContext } from './socketConnection'
 
-const SelectRoom = ({ onCreateRoom }) => {
+const SelectRoom = () => {
+  const {
+    actions: { connectToRoom }
+  } = useContext(RoomContext)
+
   return (
-    <form onSubmit={onCreateRoom}>
+    <form onSubmit={connectToRoom}>
       <label htmlFor="roomName">Room name</label>
       <input type="text" id="roomName" required />
       <br/>
@@ -13,10 +17,6 @@ const SelectRoom = ({ onCreateRoom }) => {
       <input type="submit" />
     </form>
   )
-}
-
-SelectRoom.propTypes = {
-  onCreateRoom: PropTypes.func.isRequired
 }
 
 export default SelectRoom
