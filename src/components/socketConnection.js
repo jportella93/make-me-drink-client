@@ -40,7 +40,8 @@ const SocketConnection = () => {
     users: null,
     userName: null,
     userType: null,
-    roomName: null,
+    userId: null,
+    room: null,
     isConnected: false,
     gameState: null,
     actions: {
@@ -50,9 +51,20 @@ const SocketConnection = () => {
     }
   })
 
-  RoomContext = React.createContext(roomState)
+  const currentTeam = roomState.teams?.find(team =>
+      team.members.includes(roomState.userId))
 
-  console.log('---->: SocketConnection -> roomState', roomState)
+  const derivedRoomState = {
+    isAdmin: roomState.userType === 'admin',
+    currentTeam,
+    isTeamLeader: currentTeam?.leader === roomState.userId
+  }
+
+  const contextValue = { ...roomState, ...derivedRoomState }
+
+  RoomContext = React.createContext(contextValue)
+
+  console.log('---->: contextValue', contextValue)
   return <Game />
 }
 

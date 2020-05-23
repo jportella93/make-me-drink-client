@@ -6,7 +6,7 @@ const MINIMUM_USER_NUMBER = 4
 
 const WaitingRoom = () => {
   const {
-    users, userName, userType, roomName, actions: { setGameState }
+    users, userName, roomName, isAdmin, actions: { setGameState }
   } = useContext(RoomContext)
 
   const usersLeftToPlay = MINIMUM_USER_NUMBER - users.length
@@ -24,7 +24,7 @@ const WaitingRoom = () => {
       </ul>
       {usersLeftToPlay > 0
         ? <p>{usersLeftToPlay} more players needed</p>
-        : userType === 'admin'
+        : isAdmin
           ? (
             <button
               disabled={usersLeftToPlay > 0}
