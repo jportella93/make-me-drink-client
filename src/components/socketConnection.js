@@ -2,7 +2,6 @@ import React, { useRef } from 'react'
 import socketIOClient from 'socket.io-client'
 import useSetState from 'use-state-object'
 import Game from './game'
-const ENDPOINT = 'http://127.0.0.1:3000'
 
 let RoomContext = React.createContext({})
 
@@ -11,7 +10,7 @@ const SocketConnection = () => {
 
   const actions = {
     connectToRoom: (roomName, userName) => {
-      socket.current = socketIOClient(ENDPOINT, {
+      socket.current = socketIOClient(process.env.GATSBY_API_URL, {
         query: `roomName=${roomName}&userName=${userName}`
       })
 
