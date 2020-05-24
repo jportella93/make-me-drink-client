@@ -6,7 +6,7 @@ const MINIMUM_USER_NUMBER = 4
 
 const WaitingRoom = () => {
   const {
-    users, userName, roomName, isAdmin, actions: { setGameState }
+    users, userName, room, isAdmin, actions: { setGameState }
   } = useContext(RoomContext)
 
   const usersLeftToPlay = MINIMUM_USER_NUMBER - users.length
@@ -14,7 +14,7 @@ const WaitingRoom = () => {
   return users && (
     <>
       <p>Hi there, {userName}</p>
-      <p>Online users in room {roomName}:</p>
+      <p>Online users in room {room.name}:</p>
       <ul>
         {users.map(({ name, id, type }) => (
           <li key={id}>
