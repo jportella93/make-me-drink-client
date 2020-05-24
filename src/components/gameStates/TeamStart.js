@@ -6,7 +6,7 @@ import TeamUserNames from '../teamUserNames'
 
 const TeamStart = () => {
   const {
-    users, teams, isAdmin, room, actions: { setGameState }
+    teams, isAdmin, room, actions: { setGameState }
   } = useContext(RoomContext)
 
   const sortedTeams = teams.sort((a, b) =>
@@ -22,7 +22,7 @@ const TeamStart = () => {
         </li>
       )}
     </ol>
-    <p>It&apos;s {room.currentPlayingTeam.name} turn!</p>
+    <p>It&apos;s {room.currentPlayingTeam.name} turn to answer questions!</p>
   </>
 }
 
