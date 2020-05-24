@@ -1,0 +1,43 @@
+{
+  "users": [
+    {
+      "id": "VTwVXhON95Pw9Oo9AAAC",
+      "name": "Jonny",
+      "type": "admin"
+    },
+    {
+      "id": "9ClmrpwivxitB4FsAAAD",
+      "name": "Jessie",
+      "type": "regular"
+    },
+    {
+      "id": "lOimJG-ZOjJn40FcAAAE",
+      "name": "Julie",
+      "type": "regular"
+    },
+    {
+      "id": "iYVvvh4UdeqLhh9AAAAF",
+      "name": "Jacku",
+      "type": "regular"
+    }
+  ],
+  "userName": "Jonny",
+  "userType": "admin",
+  "userId": "VTwVXhON95Pw9Oo9AAAC",
+  "room": {
+    "name": "Drunkest room",
+    "users": {},
+    "gameState": "waitingRoom",
+    "turn": 0,
+    "round": 0,
+    "maxRounds": 5,
+    "currentPlayingTeam": null
+  },
+  "isConnected": true,
+  "gameState": "waitingRoom",
+  "actions": {},
+  "timestamp": 1590341760976,
+  "isAdmin": true,
+  "isCurrentTeamTurn": true,
+  "isTeamLeader": false
+}
