@@ -3,6 +3,7 @@ import { RoomContext } from '../socketConnection'
 import TeamUserNames from '../teamUserNames'
 import useDelayedSetGameState from '../hooks/useDelayedSetGameState'
 import { ANSWER_RESULT } from '../../constants/gameStates'
+import Countdown from '../countdown'
 
 const WaitingAnswer = () => {
   const {
@@ -46,7 +47,7 @@ const WaitingAnswer = () => {
         </button>
       </>
     )}
-    (10 seg)
+    <Countdown seconds={10} />
   </>
 }
 
