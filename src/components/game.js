@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { WAITING_ROOM, MAKING_TEAMS, TEAM_START, WAITING_QUESTION, WAITING_ANSWER, ANSWER_RESULT } from '../constants/gameStates'
+import { WAITING_ROOM, MAKING_TEAMS, TEAM_START, WAITING_QUESTION, WAITING_ANSWER, ANSWER_RESULT, FINAL_RESULT } from '../constants/gameStates'
 import WaitingRoom from './gameStates/WaitingRoom'
 import MakingTeams from './gameStates/MakingTeams'
 import SelectRoom from './selectRoom'
@@ -7,6 +7,7 @@ import { RoomContext } from './socketConnection'
 import TeamStart from './gameStates/TeamStart'
 import WaitingQuestion from './gameStates/WaitingQuestion'
 import WaitingAnswer from './gameStates/WaitingAnswer'
+import AnswerResult from './gameStates/AnswerResult'
 
 const Game = () => {
   const {
@@ -20,7 +21,7 @@ const Game = () => {
     [TEAM_START, <TeamStart />],
     [WAITING_QUESTION, <WaitingQuestion />],
     [WAITING_ANSWER, <WaitingAnswer />],
-    // [FINAL_RESULT, <FinalResult />]
+    [ANSWER_RESULT, <AnswerResult />],
   ])
   /* eslint-enable react/jsx-key */
 
