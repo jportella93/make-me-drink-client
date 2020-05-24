@@ -6,8 +6,8 @@ import { ANSWER_RESULT } from '../../constants/gameStates'
 
 const WaitingAnswer = () => {
   const {
-    room: { currentQuestion: { content, id, creator }, name },
-    isCurrentTeamTurn, currentTeam, isAdmin,
+    room: { currentPlayingTeam, currentQuestion: { content, id, creator }, name },
+    isCurrentTeamTurn, isAdmin,
     userId, actions: { sendAnswer: sendAnswerToServer, setGameState }
   } = useContext(RoomContext)
 
@@ -33,11 +33,11 @@ const WaitingAnswer = () => {
     return () => clearTimeout(autoFalseAnswerTimeout)
   }, [sendAnswer, isCurrentTeamTurn])
 
-  useDelayedSetGameState(isAdmin, setGameState, ANSWER_RESULT, 10000)
+  useDelayedSetGameState(isAdmin, setGameState, ANSWER_RESULT, 11000)
 
   return <>
     <p>{creator.name} asked &quot;{content}&quot; to{' '}
-      <TeamUserNames team={currentTeam} /></p>
+      <TeamUserNames team={currentPlayingTeam} /></p>
     {isCurrentTeamTurn && (
       <>
         <p>Click (and drink) if you think it&apos;s you!</p>
