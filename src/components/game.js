@@ -1,10 +1,11 @@
 import React, { useContext } from 'react'
-import { WAITING_ROOM, MAKING_TEAMS, TEAM_START, WAITING_QUESTION } from '../constants/gameStates'
+import { WAITING_ROOM, MAKING_TEAMS, TEAM_START, WAITING_QUESTION, WAITING_ANSWER, ANSWER_RESULT } from '../constants/gameStates'
 import WaitingRoom from './gameStates/WaitingRoom'
 import MakingTeams from './gameStates/MakingTeams'
 import SelectRoom from './selectRoom'
 import { RoomContext } from './socketConnection'
 import TeamStart from './gameStates/TeamStart'
+import WaitingQuestion from './gameStates/WaitingQuestion'
 
 const Game = () => {
   const {
@@ -16,8 +17,7 @@ const Game = () => {
     [WAITING_ROOM, <WaitingRoom />],
     [MAKING_TEAMS, <MakingTeams />],
     [TEAM_START, <TeamStart />],
-    // [WAITING_ANSWER, <WaitingAnswer />]
-    // [ANSWER_RESULT, <AnswerResult />]
+    [WAITING_QUESTION, <WaitingQuestion />],
     // [FINAL_RESULT, <FinalResult />]
   ])
   /* eslint-enable react/jsx-key */
