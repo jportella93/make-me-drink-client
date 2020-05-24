@@ -9,32 +9,36 @@ let RoomContext = React.createContext({})
 const SocketConnection = () => {
   const socket = useRef()
 
-  function connectToRoom (e) {
-    e.preventDefault()
-    const { roomName, userName } = e.target.elements
+  const actions = {
+    connectToRoom: (roomName, userName) => {
+      socket.current = socketIOClient(ENDPOINT, {
+        query: `roomName=${roomName}&userName=${userName}`
+      })
 
-    socket.current = socketIOClient(ENDPOINT, {
-      query: `roomName=${roomName.value}&userName=${userName.value}`
-    })
+      socket.current.on('connection confirmation', (roomState) => {
+        setRoomState({ ...roomState, isConnected: true })
+      })
 
-    socket.current.on('connection confirmation', (roomState) => {
-      setRoomState({ ...roomState, isConnected: true })
-    })
+      socket.current.on('room state', setRoomState)
 
-    socket.current.on('room state', setRoomState)
+      socket.current.on('error', console.error)
 
-    socket.current.on('error', console.error)
-
-    socket.current.emit('connection confirmation')
+      socket.current.emit('connection confirmation')
+    },
+    setGameState: (state) => {
+      socket.current.emit('game state change', state)
+    },
+    setTeamName: (payload) => {
+      socket.current.emit('set team name', payload)
+    },
+    sendQuestion: (payload) => {
+      socket.current.emit('question', payload)
+    },
+    sendAnswer: (payload) => {
+      socket.current.emit('answer', payload)
+    },
   }
 
-  function setGameState (state) {
-    socket.current.emit('game state change', state)
-  }
-
-  function setTeamName ({ teamId, teamName, roomName }) {
-    socket.current.emit('set team name', { teamId, teamName, roomName })
-  }
 
   const [roomState, setRoomState] = useSetState({
     users: null,
@@ -44,11 +48,7 @@ const SocketConnection = () => {
     room: null,
     isConnected: false,
     gameState: null,
-    actions: {
-      connectToRoom,
-      setGameState,
-      setTeamName
-    }
+    actions
   })
 
   const currentTeam = roomState.teams?.find(team =>
