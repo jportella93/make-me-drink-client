@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
+import { GAME_START } from '../../constants/gameStates'
 import { RoomContext } from '../socketConnection'
-import { MAKING_TEAMS } from '../../constants/gameStates'
 
-const MINIMUM_USER_NUMBER = 4
+const MINIMUM_USER_NUMBER = 2
 
 const WaitingRoom = () => {
   const {
@@ -28,7 +28,7 @@ const WaitingRoom = () => {
           ? (
             <button
               disabled={usersLeftToPlay > 0}
-              onClick={() => setGameState(MAKING_TEAMS)}>
+              onClick={() => setGameState(GAME_START)}>
               Start
             </button>
           )

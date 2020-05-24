@@ -8,6 +8,7 @@ import TeamStart from './gameStates/TeamStart'
 import WaitingQuestion from './gameStates/WaitingQuestion'
 import WaitingAnswer from './gameStates/WaitingAnswer'
 import AnswerResult from './gameStates/AnswerResult'
+import FinalResult from './gameStates/FinalResult'
 
 const Game = () => {
   const {
@@ -22,6 +23,7 @@ const Game = () => {
     [WAITING_QUESTION, <WaitingQuestion />],
     [WAITING_ANSWER, <WaitingAnswer />],
     [ANSWER_RESULT, <AnswerResult />],
+    [FINAL_RESULT, <FinalResult />]
   ])
   /* eslint-enable react/jsx-key */
 

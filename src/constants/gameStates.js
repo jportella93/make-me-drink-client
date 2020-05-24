@@ -1,4 +1,5 @@
 export const WAITING_ROOM = 'waitingRoom'
+export const GAME_START = 'gameStart'
 export const MAKING_TEAMS = 'makingTeams'
 export const TEAM_START = 'teamStart'
 export const WAITING_QUESTION = 'waitingQuestion'

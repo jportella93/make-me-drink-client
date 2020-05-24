@@ -6,7 +6,8 @@ import TeamUserNames from '../teamUserNames'
 
 const TeamStart = () => {
   const {
-    teams, isAdmin, room, actions: { setGameState }
+    teams, isAdmin, room: { currentPlayingTeam, round, maxRounds },
+    actions: { setGameState }
   } = useContext(RoomContext)
 
   const sortedTeams = teams.sort((a, b) =>
@@ -15,6 +16,7 @@ const TeamStart = () => {
   useDelayedSetGameState(isAdmin, setGameState, WAITING_QUESTION, 5000)
 
   return <>
+    <p>Round {round}/{maxRounds}</p>
     <ol>
       {sortedTeams.map(team =>
         <li key={team.id}>
@@ -22,7 +24,7 @@ const TeamStart = () => {
         </li>
       )}
     </ol>
-    <p>It&apos;s {room.currentPlayingTeam.name} turn to answer questions!</p>
+    <p>It&apos;s {currentPlayingTeam.name} turn to answer questions!</p>
   </>
 }
 
