@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { WAITING_QUESTION } from '../../constants/gameStates'
 import useDelayedSetGameState from '../hooks/useDelayedSetGameState'
 import { RoomContext } from '../socketConnection'
+import TeamUserNames from '../teamUserNames'
 
 const TeamStart = () => {
   const {
@@ -17,7 +18,7 @@ const TeamStart = () => {
     <ol>
       {sortedTeams.map(team =>
         <li key={team.id}>
-          {team.name} ({team.members.map(id => getUserName(id)).join(' and ')})
+          <TeamUserNames team={team}/>
         </li>
       )}
     </ol>
