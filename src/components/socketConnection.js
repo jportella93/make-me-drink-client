@@ -21,7 +21,7 @@ const SocketConnection = () => {
 
       socket.current.on('room state', setRoomState)
 
-      socket.current.on('error', console.error)
+      socket.current.on('server error', console.error)
 
       socket.current.emit('connection confirmation')
     },
