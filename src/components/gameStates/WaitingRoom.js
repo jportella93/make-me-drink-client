@@ -1,3 +1,4 @@
+import { Button, Box, DataTable, Text, Paragraph, Stack, Meter } from 'grommet'
 import React, { useContext } from 'react'
 import { GAME_START } from '../../constants/gameStates'
 import { RoomContext } from '../socketConnection'
@@ -12,32 +13,61 @@ const WaitingRoom = () => {
   const usersLeftToPlay = MINIMUM_USER_NUMBER - users.length
 
   return users && (
-    <>
-      <p>Hi there, {userName}</p>
-      <p>Online users in room {room.name}:</p>
-      <ul>
-        {users.map(({ name, id, type }) => (
-          <li key={id}>
-            {name}{type === 'admin' && ' 👑'}
-          </li>
-        ))}
-      </ul>
+    <Box>
+      <DataTable
+        columns={[{
+          property: 'name',
+          header: (
+            <Text>
+              Online users in room <Text size="large">{room.name}</Text>
+            </Text>
+          ),
+          primary: true,
+          render: ({ name, type }) =>
+            `${name}${type === 'admin' ? ' 👑' : ''}`
+        }
+        ]}
+        data={users}
+      />
       {usersLeftToPlay > 0
-        ? <p>{usersLeftToPlay} more players needed</p>
+        ? (
+          <>
+            <Box align="center" pad="large">
+              <Stack anchor="center">
+                <Meter
+                  type="circle"
+                  background="light-2"
+                  values={[{ value: 100 - (usersLeftToPlay * 100 / 4) }]}
+                  size="xsmall"
+                  thickness="small"
+                />
+                <Box direction="row" align="center" pad={{ bottom: 'xsmall' }}>
+                  <Text size="xlarge" weight="bold">
+                    {users.length}
+                  </Text>
+                </Box>
+              </Stack>
+              <Box pad="medium" align="center">
+                <Paragraph>At least {usersLeftToPlay} more players needed</Paragraph>
+              </Box>
+            </Box>
+          </>
+        )
         : isAdmin
           ? (
-            <button
+            <Button
+              alignSelf="end"
               disabled={usersLeftToPlay > 0}
-              onClick={() => setGameState(GAME_START)}>
-              Start
-            </button>
+              onClick={() => setGameState(GAME_START)}
+              label="Start"
+            />
           )
-          : <p>
+          : <Paragraph>
             Waiting for {users.find(({ type }) => type === 'admin').name}{' '}
             to start the game
-          </p>
+          </Paragraph>
       }
-    </>
+    </Box>
   )
 }
 
