@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import { GAME_START } from '../../constants/gameStates'
 import { RoomContext } from '../socketConnection'
 
-const MINIMUM_USER_NUMBER = 2
+const MINIMUM_USER_NUMBER = 4
 
 const WaitingRoom = () => {
   const {
