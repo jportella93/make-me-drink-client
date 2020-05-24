@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { RoomContext } from '../socketConnection'
+import { Paragraph, Text, Form, FormField, TextInput, Box, Button } from 'grommet'
 
 const MakingTeams = () => {
   const {
@@ -32,19 +33,21 @@ const MakingTeams = () => {
 
   return (
     <>
-      <p>User: {userName}</p>
-      <p>You are teaming up with {getPartnerNames()}</p>
+      <Paragraph>You are teaming up with <Text size="large">{getPartnerNames()}</Text></Paragraph>
       {currentTeam.name
-        ? <p>Team name: {currentTeam.name}</p>
+        ? <Paragraph>Team name: <Text size="large">{currentTeam.name}</Text></Paragraph>
         : isTeamLeader
           ? (
-            <form onSubmit={setTeamName}>
-              <label htmlFor="teamName">Team name</label>
-              <input type="text" id="teamName" required />
-              <input type="submit" />
-            </form>
+            <Form onSubmit={setTeamName}>
+              <FormField required name="teamName" htmlfor="teamName" label="Team name">
+                <TextInput id="teamName" name="teamName" />
+              </FormField>
+              <Box align="end">
+                <Button type="submit" primary label="Submit" />
+              </Box>
+            </Form>
           )
-          : <p>Waiting for {getLeaderName()} to choose a team name</p>
+          : <Paragraph>Waiting for <Text size="large">{getLeaderName()}</Text> to choose a team name</Paragraph>
       }
     </>
   )
