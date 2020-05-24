@@ -1,5 +1,6 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import { WAITING_QUESTION } from '../../constants/gameStates'
+import useDelayedSetGameState from '../hooks/useDelayedSetGameState'
 import { RoomContext } from '../socketConnection'
 
 const TeamStart = () => {
@@ -10,16 +11,7 @@ const TeamStart = () => {
   const sortedTeams = teams.sort((a, b) =>
     ((a.order > b.order) ? 1 : ((b.order > a.order) ? -1 : 0)))
 
-  const getUserName = (id) => users.find(user => user.id === id).name
-
-  useEffect(() => {
-    if (!isAdmin) return
-    const nextGameStateTimeout = setTimeout(() => {
-      setGameState(WAITING_QUESTION)
-    }, 5000)
-
-    return () => clearTimeout(nextGameStateTimeout)
-  }, [isAdmin, setGameState])
+  useDelayedSetGameState(isAdmin, setGameState, WAITING_QUESTION, 5000)
 
   return <>
     <ol>
