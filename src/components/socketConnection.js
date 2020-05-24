@@ -52,11 +52,12 @@ const SocketConnection = () => {
   })
 
   const currentTeam = roomState.teams?.find(team =>
-      team.members.includes(roomState.userId))
+    team.members.includes(roomState.userId))
 
   const derivedRoomState = {
     isAdmin: roomState.userType === 'admin',
     currentTeam,
+    isCurrentTeamTurn: roomState.room?.currentPlayingTeam?.id === currentTeam?.id,
     isTeamLeader: currentTeam?.leader === roomState.userId
   }
 
