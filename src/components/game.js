@@ -6,6 +6,7 @@ import SelectRoom from './selectRoom'
 import { RoomContext } from './socketConnection'
 import TeamStart from './gameStates/TeamStart'
 import WaitingQuestion from './gameStates/WaitingQuestion'
+import WaitingAnswer from './gameStates/WaitingAnswer'
 
 const Game = () => {
   const {
@@ -18,6 +19,7 @@ const Game = () => {
     [MAKING_TEAMS, <MakingTeams />],
     [TEAM_START, <TeamStart />],
     [WAITING_QUESTION, <WaitingQuestion />],
+    [WAITING_ANSWER, <WaitingAnswer />],
     // [FINAL_RESULT, <FinalResult />]
   ])
   /* eslint-enable react/jsx-key */
