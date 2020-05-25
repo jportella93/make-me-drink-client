@@ -15,6 +15,7 @@ const WaitingRoom = () => {
   return users && (
     <Box>
       <DataTable
+        pad="small"
         columns={[{
           property: 'name',
           header: (
@@ -32,24 +33,8 @@ const WaitingRoom = () => {
       {usersLeftToPlay > 0
         ? (
           <>
-            <Box align="center" pad="large">
-              <Stack anchor="center">
-                <Meter
-                  type="circle"
-                  background="light-2"
-                  values={[{ value: 100 - (usersLeftToPlay * 100 / 4) }]}
-                  size="xsmall"
-                  thickness="small"
-                />
-                <Box direction="row" align="center" pad={{ bottom: 'xsmall' }}>
-                  <Text size="xlarge" weight="bold">
-                    {users.length}
-                  </Text>
-                </Box>
-              </Stack>
-              <Box pad="medium" align="center">
-                <Paragraph>At least {usersLeftToPlay} more players needed</Paragraph>
-              </Box>
+            <Box pad="medium" align="center">
+              <Paragraph>At least {usersLeftToPlay} more players needed</Paragraph>
             </Box>
           </>
         )

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { RoomContext } from '../socketConnection'
 import TeamUserNames from '../teamUserNames'
+import Stats from '../stats'
 
 const WaitingQuestion = () => {
   const {
@@ -20,6 +21,7 @@ const WaitingQuestion = () => {
   }
 
   return <>
+    <Stats />
     {isCurrentTeamTurn
       ? (
         <p>
