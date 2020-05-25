@@ -18,11 +18,12 @@ const SelectRoom = () => {
       <FormField required name="roomName" htmlfor="roomName" label="Room name">
         <TextInput id="roomName" name="roomName" />
       </FormField>
-      <FormField required name="userName" htmlfor="userName" label="User name">
+      <FormField margin={{ top: 'large' }} required name="userName"
+        htmlfor="userName" label="User name">
         <TextInput id="userName" name="userName" />
       </FormField>
-      <Box direction="row" gap="medium">
-        <Button type="submit" primary label="Submit" />
+      <Box pad={{ top: 'xlarge' }} align="end">
+        <Button pad={{ top: 'large' }} type="submit" primary label="Submit" />
       </Box>
     </Form>
   )
