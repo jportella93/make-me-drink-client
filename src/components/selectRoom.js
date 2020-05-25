@@ -16,7 +16,7 @@ const SelectRoom = () => {
   return (
     <Form onSubmit={onSubmit}>
       <FormField required name="roomName" htmlfor="roomName" label="Room name">
-        <TextInput id="roomName" name="roomName" />
+        <TextInput autoFocus id="roomName" name="roomName" />
       </FormField>
       <FormField margin={{ top: 'large' }} required name="userName"
         htmlfor="userName" label="User name">

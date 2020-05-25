@@ -40,7 +40,7 @@ const MakingTeams = () => {
           ? (
             <Form onSubmit={setTeamName}>
               <FormField required name="teamName" htmlfor="teamName" label="Team name">
-                <TextInput id="teamName" name="teamName" />
+                <TextInput autoFocus id="teamName" name="teamName" />
               </FormField>
               <Box align="end">
                 <Button type="submit" primary label="Submit" />
