@@ -1,10 +1,10 @@
+import { Box, Button, Form, FormField, Paragraph, Text, TextInput } from 'grommet'
 import React, { useContext } from 'react'
 import { RoomContext } from '../socketConnection'
-import { Paragraph, Text, Form, FormField, TextInput, Box, Button } from 'grommet'
 
 const MakingTeams = () => {
   const {
-    users, userName, room, userId, currentTeam, isTeamLeader,
+    users, room, userId, currentTeam, isTeamLeader,
     actions: { setTeamName: setTeamNameToServer }
   } = useContext(RoomContext)
 
@@ -33,21 +33,38 @@ const MakingTeams = () => {
 
   return (
     <>
-      <Paragraph>You are teaming up with <Text size="large">{getPartnerNames()}</Text></Paragraph>
+      <Paragraph margin={{ bottom: 'medium' }}>
+        You are teaming up with <Text size="large">{getPartnerNames()}</Text>
+      </Paragraph>
       {currentTeam.name
-        ? <Paragraph>Team name: <Text size="large">{currentTeam.name}</Text></Paragraph>
+        ? (
+          <>
+            <Paragraph margin={{ bottom: 'medium' }}>
+              Team name: <Text size="large">{currentTeam.name}</Text>
+            </Paragraph>
+            <Paragraph>
+              Waiting for the rest of the teams to choose name...
+            </Paragraph>
+          </>
+        )
         : isTeamLeader
           ? (
             <Form onSubmit={setTeamName}>
-              <FormField required name="teamName" htmlfor="teamName" label="Team name">
+              <FormField required name="teamName"
+                htmlfor="teamName" label="Team name">
                 <TextInput autoFocus id="teamName" name="teamName" />
               </FormField>
-              <Box align="end">
+              <Box pad={{ top: 'large' }} align="end">
                 <Button type="submit" primary label="Submit" />
               </Box>
             </Form>
           )
-          : <Paragraph>Waiting for <Text size="large">{getLeaderName()}</Text> to choose a team name</Paragraph>
+          : (
+            <Paragraph>
+              Waiting for <Text size="large">{getLeaderName()}</Text>{' '}
+              to choose a team name
+            </Paragraph>
+          )
       }
     </>
   )
