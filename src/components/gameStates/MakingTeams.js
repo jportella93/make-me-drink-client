@@ -1,9 +1,10 @@
+import { Box, Button, Form, FormField, Paragraph, Text, TextInput } from 'grommet'
 import React, { useContext } from 'react'
 import { RoomContext } from '../socketConnection'
 
 const MakingTeams = () => {
   const {
-    users, userName, room, userId, currentTeam, isTeamLeader,
+    users, room, userId, currentTeam, isTeamLeader,
     actions: { setTeamName: setTeamNameToServer }
   } = useContext(RoomContext)
 
@@ -32,19 +33,38 @@ const MakingTeams = () => {
 
   return (
     <>
-      <p>User: {userName}</p>
-      <p>You are teaming up with {getPartnerNames()}</p>
+      <Paragraph margin={{ bottom: 'medium' }}>
+        You are teaming up with <Text size="large">{getPartnerNames()}</Text>
+      </Paragraph>
       {currentTeam.name
-        ? <p>Team name: {currentTeam.name}</p>
+        ? (
+          <>
+            <Paragraph margin={{ bottom: 'medium' }}>
+              Team name: <Text size="large">{currentTeam.name}</Text>
+            </Paragraph>
+            <Paragraph>
+              Waiting for the rest of the teams to choose name...
+            </Paragraph>
+          </>
+        )
         : isTeamLeader
           ? (
-            <form onSubmit={setTeamName}>
-              <label htmlFor="teamName">Team name</label>
-              <input type="text" id="teamName" required />
-              <input type="submit" />
-            </form>
+            <Form onSubmit={setTeamName}>
+              <FormField required name="teamName"
+                htmlfor="teamName" label="Team name">
+                <TextInput autoFocus id="teamName" name="teamName" />
+              </FormField>
+              <Box pad={{ top: 'large' }} align="end">
+                <Button type="submit" primary label="Submit" />
+              </Box>
+            </Form>
           )
-          : <p>Waiting for {getLeaderName()} to choose a team name</p>
+          : (
+            <Paragraph>
+              Waiting for <Text size="large">{getLeaderName()}</Text>{' '}
+              to choose a team name
+            </Paragraph>
+          )
       }
     </>
   )

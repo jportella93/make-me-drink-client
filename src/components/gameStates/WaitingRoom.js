@@ -1,8 +1,9 @@
+import { Button, Box, DataTable, Text, Paragraph, Stack, Meter } from 'grommet'
 import React, { useContext } from 'react'
 import { GAME_START } from '../../constants/gameStates'
 import { RoomContext } from '../socketConnection'
 
-const MINIMUM_USER_NUMBER = 2
+const MINIMUM_USER_NUMBER = 4
 
 const WaitingRoom = () => {
   const {
@@ -12,32 +13,46 @@ const WaitingRoom = () => {
   const usersLeftToPlay = MINIMUM_USER_NUMBER - users.length
 
   return users && (
-    <>
-      <p>Hi there, {userName}</p>
-      <p>Online users in room {room.name}:</p>
-      <ul>
-        {users.map(({ name, id, type }) => (
-          <li key={id}>
-            {name}{type === 'admin' && ' 👑'}
-          </li>
-        ))}
-      </ul>
+    <Box>
+      <DataTable
+        pad="small"
+        columns={[{
+          property: 'name',
+          header: (
+            <Text>
+              Online users in room <Text size="large">{room.name}</Text>
+            </Text>
+          ),
+          primary: true,
+          render: ({ name, type }) =>
+            `${name}${type === 'admin' ? ' 👑' : ''}`
+        }
+        ]}
+        data={users}
+      />
       {usersLeftToPlay > 0
-        ? <p>{usersLeftToPlay} more players needed</p>
+        ? (
+          <>
+            <Box pad="medium" align="center">
+              <Paragraph>At least {usersLeftToPlay} more players needed</Paragraph>
+            </Box>
+          </>
+        )
         : isAdmin
           ? (
-            <button
+            <Button
+              alignSelf="end"
               disabled={usersLeftToPlay > 0}
-              onClick={() => setGameState(GAME_START)}>
-              Start
-            </button>
+              onClick={() => setGameState(GAME_START)}
+              label="Start"
+            />
           )
-          : <p>
+          : <Paragraph>
             Waiting for {users.find(({ type }) => type === 'admin').name}{' '}
             to start the game
-          </p>
+          </Paragraph>
       }
-    </>
+    </Box>
   )
 }
 

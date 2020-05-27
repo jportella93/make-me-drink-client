@@ -1,5 +1,7 @@
+import { Box, Button, Form, FormField, Paragraph, TextInput } from 'grommet'
 import React, { useContext } from 'react'
 import { RoomContext } from '../socketConnection'
+import Stats from '../stats'
 import TeamUserNames from '../teamUserNames'
 
 const WaitingQuestion = () => {
@@ -20,26 +22,29 @@ const WaitingQuestion = () => {
   }
 
   return <>
+    <Stats />
     {isCurrentTeamTurn
       ? (
-        <p>
+        <Paragraph>
           Waiting for the other teams to make a question to{' '}
           team <TeamUserNames team={currentPlayingTeam} />
-        </p>
+        </Paragraph>
       )
       : (
         <>
-          <p>
+          <Paragraph>
             Make a question to team <TeamUserNames team={currentPlayingTeam} />
-          </p>
-          <form onSubmit={makeQuestion}>
-            <input type="text"
-              id="question"
-              placeholder="who is more smart?"
-              required
-            />
-            <input type="submit" />
-          </form>
+          </Paragraph>
+          <Form onSubmit={makeQuestion}>
+            <FormField required name="question" htmlfor="question">
+              <TextInput autoFocus placeholder="Who is smarter?"
+                id="question" name="question" />
+            </FormField>
+            <Box pad={{ top: 'xlarge' }} align="end">
+              <Button pad={{ top: 'large' }} type="submit"
+                primary label="Submit" />
+            </Box>
+          </Form>
         </>
       )
     }

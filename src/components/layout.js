@@ -1,15 +1,9 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
-import React from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
+import { Box, Grommet, Main } from 'grommet'
 import PropTypes from 'prop-types'
-import { useStaticQuery, graphql } from 'gatsby'
-
+import React from 'react'
 import Header from './header'
+
 import './layout.css'
 
 const Layout = ({ children }) => {
@@ -23,12 +17,26 @@ const Layout = ({ children }) => {
     }
   `)
 
+  const theme = {
+    global: {
+      font: {
+        family: 'Roboto',
+        size: '14px',
+        height: '20px'
+      }
+    }
+  }
+
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <main>{children}</main>
-      <footer></footer>
-    </>
+    <Grommet theme={theme}>
+      <Box style={{ minHeight: '100vh' }}>
+        <Header siteTitle={data.site.siteMetadata.title} />
+        <Main pad="medium" background="dark-1" justify="center">
+          {children}
+        </Main>
+        <footer></footer>
+      </Box>
+    </Grommet>
   )
 }
 

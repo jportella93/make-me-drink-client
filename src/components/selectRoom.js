@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { RoomContext } from './socketConnection'
+import { Box, Form, FormField, TextInput, Button } from 'grommet'
 
 const SelectRoom = () => {
   const {
@@ -13,15 +14,18 @@ const SelectRoom = () => {
   }
 
   return (
-    <form onSubmit={onSubmit}>
-      <label htmlFor="roomName">Room name</label>
-      <input type="text" id="roomName" required />
-      <br/>
-      <label htmlFor="userName">User name</label>
-      <input type="text" id="userName" required />
-      <br/>
-      <input type="submit" />
-    </form>
+    <Form onSubmit={onSubmit}>
+      <FormField required name="roomName" htmlfor="roomName" label="Room name">
+        <TextInput autoFocus id="roomName" name="roomName" />
+      </FormField>
+      <FormField margin={{ top: 'large' }} required name="userName"
+        htmlfor="userName" label="User name">
+        <TextInput id="userName" name="userName" />
+      </FormField>
+      <Box pad={{ top: 'xlarge' }} align="end">
+        <Button pad={{ top: 'large' }} type="submit" primary label="Submit" />
+      </Box>
+    </Form>
   )
 }
 
