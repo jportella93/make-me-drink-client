@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Default Starter',
-    description: 'Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.',
-    author: '@gatsbyjs'
+    title: 'Make me drink',
+    description: 'Outsmart your friends and make them drink by asking questions in this party game! Perfect as a lockdown game 🦠',
+    author: 'Jon Portella'
   },
   plugins: [
     'gatsby-optional-chaining',
