@@ -1,4 +1,4 @@
-import { Box, Heading } from 'grommet'
+import { Box } from 'grommet'
 import React from 'react'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
@@ -12,9 +12,6 @@ const IndexPage = () => (
       alignSelf="center"
       alignContent="stretch"
     >
-      <Heading alignSelf="center" margin={{ bottom: 'xlarge' }}>
-        Make me Drink! 🍺
-      </Heading>
       <SocketConnection />
     </Box>
   </Layout>
