@@ -1,10 +1,16 @@
 import { Box, Button, Form, FormField, Paragraph, TextInput } from 'grommet'
+import styled from 'styled-components'
 import React, { useContext, useState } from 'react'
 import { RoomContext } from '../socketConnection'
 import Stats from '../stats'
 import TeamUserNames from '../teamUserNames'
 import questions from '../data/questions'
 import getRandomInt from '../utils/getRandomInt'
+
+const GlowingButton = styled(Button)`
+  font-size: 20px;
+  animation: glow 0.7s ease-in-out infinite alternate;
+`;
 
 const WaitingQuestion = () => {
   const {
@@ -47,7 +53,7 @@ const WaitingQuestion = () => {
                 id="question" name="question" value={question}
                 onChange={event => setQuestion(event.target.value)} />
             </FormField>
-            <Button class='glow' label="💡"
+            <GlowingButton label="💡"
               onClick={() => setQuestion(getRandomQuestion())}
               secondary size="small"
             />

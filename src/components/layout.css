@@ -617,13 +617,6 @@ pre tt:after {
   content: "";
 }
 
-.glow {
-  font-size: 20px;
-  -webkit-animation: glow 0.7s ease-in-out infinite alternate;
-  -moz-animation: glow 0.7s ease-in-out infinite alternate;
-  animation: glow 0.7s ease-in-out infinite alternate;
-}
-
 @keyframes glow {
   from {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 
