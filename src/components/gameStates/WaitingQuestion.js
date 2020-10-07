@@ -47,7 +47,7 @@ const WaitingQuestion = () => {
                 id="question" name="question" value={question}
                 onChange={event => setQuestion(event.target.value)} />
             </FormField>
-            <Button label="💡"
+            <Button class='glow' label="💡"
               onClick={() => setQuestion(getRandomQuestion())}
               secondary size="small"
             />
