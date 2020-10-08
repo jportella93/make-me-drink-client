@@ -6,7 +6,7 @@ import Spinner from './Spinner'
 const SelectRoom = () => {
   const {
     isLoading,
-    actions: { connectToRoom },
+    actions: { connectToRoom }
   } = useContext(RoomContext)
 
   function onSubmit(e) {
@@ -17,35 +17,20 @@ const SelectRoom = () => {
 
   return (
     <>
-      <Heading alignSelf='center' margin={{ bottom: 'xlarge' }}>
+      <Heading alignSelf="center" margin={{ bottom: 'xlarge' }}>
         Make me Drink! 🍺
       </Heading>
-      <Form onSubmit={onSubmit}>
-        <FormField
-          required
-          name='roomName'
-          htmlfor='roomName'
-          label='Room name'
-        >
-          <TextInput autoFocus id='roomName' name='roomName' />
+      <Form onSubmit={isLoading ? null : onSubmit}>
+        <FormField required name="roomName" htmlfor="roomName"
+          label="Room name">
+          <TextInput autoFocus id="roomName" name="roomName" />
         </FormField>
-        <FormField
-          margin={{ top: 'large' }}
-          required
-          name='userName'
-          htmlfor='userName'
-          label='User name'
-        >
-          <TextInput id='userName' name='userName' />
+        <FormField margin={{ top: 'large' }} required name="userName"
+          htmlfor="userName" label="User name">
+          <TextInput id="userName" name="userName" />
         </FormField>
-        <Box pad={{ top: 'xlarge' }} align='end'>
-          <Button
-            icon={isLoading ? <Spinner /> : null}
-            pad={{ top: 'large' }}
-            type='submit'
-            primary
-            label={isLoading ? 'Loading' : 'Submit'}
-          />
+        <Box pad={{ top: 'xlarge' }} align="end">
+          <Button pad={{ top: 'large' }} type='submit' primary label={isLoading ? 'Loading' : 'Submit'} icon={isLoading ? <Spinner /> : null} />
         </Box>
       </Form>
     </>

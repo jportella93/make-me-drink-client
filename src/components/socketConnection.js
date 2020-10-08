@@ -12,15 +12,17 @@ const SocketConnection = () => {
     connectToRoom: (roomName, userName) => {
       setRoomState({ ...roomState, isLoading: true })
       socket.current = socketIOClient(process.env.GATSBY_API_URL, {
-        query: `roomName=${roomName}&userName=${userName}`,
+        query: `roomName=${roomName}&userName=${userName}`
       })
 
       socket.current.on('connection confirmation', (roomState) => {
-        setRoomState({ ...roomState, isConnected: true, isLoading: false })
+        setRoomState({ ...roomState, isConnected: true })
       })
 
       socket.current.on('room state', setRoomState)
+
       socket.current.on('server error', console.error)
+
       socket.current.emit('connection confirmation')
     },
     setGameState: (state) => {
@@ -37,6 +39,7 @@ const SocketConnection = () => {
     },
   }
 
+
   const [roomState, setRoomState] = useSetState({
     users: null,
     userName: null,
@@ -46,19 +49,17 @@ const SocketConnection = () => {
     isConnected: false,
     isLoading: false,
     gameState: null,
-    actions,
+    actions
   })
 
-  const currentTeam = roomState.teams?.find((team) =>
-    team.members.includes(roomState.userId)
-  )
+  const currentTeam = roomState.teams?.find(team =>
+    team.members.includes(roomState.userId))
 
   const derivedRoomState = {
     isAdmin: roomState.userType === 'admin',
     currentTeam,
-    isCurrentTeamTurn:
-      roomState.room?.currentPlayingTeam?.id === currentTeam?.id,
-    isTeamLeader: currentTeam?.leader === roomState.userId,
+    isCurrentTeamTurn: roomState.room?.currentPlayingTeam?.id === currentTeam?.id,
+    isTeamLeader: currentTeam?.leader === roomState.userId
   }
 
   const contextValue = { ...roomState, ...derivedRoomState }

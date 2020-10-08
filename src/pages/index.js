@@ -6,11 +6,11 @@ import SocketConnection from '../components/socketConnection'
 
 const IndexPage = () => (
   <Layout>
-    <SEO title='Home' />
+    <SEO title="Home" />
     <Box
       width={{ max: '500px', min: '50vw' }}
-      alignSelf='center'
-      alignContent='stretch'
+      alignSelf="center"
+      alignContent="stretch"
     >
       <SocketConnection />
     </Box>
