@@ -1,43 +1,41 @@
-import React, { useRef } from 'react'
-import socketIOClient from 'socket.io-client'
-import useSetState from 'use-state-object'
-import Game from './game'
+import React, { useRef } from "react";
+import socketIOClient from "socket.io-client";
+import useSetState from "use-state-object";
+import Game from "./game";
 
-let RoomContext = React.createContext({})
+let RoomContext = React.createContext({});
 
 const SocketConnection = () => {
-  const socket = useRef()
+  const socket = useRef();
 
   const actions = {
     connectToRoom: (roomName, userName) => {
+      setRoomState({ ...roomState, isLoading: true });
       socket.current = socketIOClient(process.env.GATSBY_API_URL, {
-        query: `roomName=${roomName}&userName=${userName}`
-      })
+        query: `roomName=${roomName}&userName=${userName}`,
+      });
 
-      socket.current.on('connection confirmation', (roomState) => {
-        setRoomState({ ...roomState, isConnected: true })
-      })
+      socket.current.on("connection confirmation", (roomState) => {
+        setRoomState({ ...roomState, isConnected: true, isLoading: false });
+      });
 
-      socket.current.on('room state', setRoomState)
-
-      socket.current.on('server error', console.error)
-
-      socket.current.emit('connection confirmation')
+      socket.current.on("room state", setRoomState);
+      socket.current.on("server error", console.error);
+      socket.current.emit("connection confirmation");
     },
     setGameState: (state) => {
-      socket.current.emit('game state change', state)
+      socket.current.emit("game state change", state);
     },
     setTeamName: (payload) => {
-      socket.current.emit('set team name', payload)
+      socket.current.emit("set team name", payload);
     },
     sendQuestion: (payload) => {
-      socket.current.emit('question', payload)
+      socket.current.emit("question", payload);
     },
     sendAnswer: (payload) => {
-      socket.current.emit('answer', payload)
+      socket.current.emit("answer", payload);
     },
-  }
-
+  };
 
   const [roomState, setRoomState] = useSetState({
     users: null,
@@ -46,27 +44,30 @@ const SocketConnection = () => {
     userId: null,
     room: null,
     isConnected: false,
+    isLoading: false,
     gameState: null,
-    actions
-  })
+    actions,
+  });
 
-  const currentTeam = roomState.teams?.find(team =>
-    team.members.includes(roomState.userId))
+  const currentTeam = roomState.teams?.find((team) =>
+    team.members.includes(roomState.userId)
+  );
 
   const derivedRoomState = {
-    isAdmin: roomState.userType === 'admin',
+    isAdmin: roomState.userType === "admin",
     currentTeam,
-    isCurrentTeamTurn: roomState.room?.currentPlayingTeam?.id === currentTeam?.id,
-    isTeamLeader: currentTeam?.leader === roomState.userId
-  }
+    isCurrentTeamTurn:
+      roomState.room?.currentPlayingTeam?.id === currentTeam?.id,
+    isTeamLeader: currentTeam?.leader === roomState.userId,
+  };
 
-  const contextValue = { ...roomState, ...derivedRoomState }
+  const contextValue = { ...roomState, ...derivedRoomState };
 
-  RoomContext = React.createContext(contextValue)
+  RoomContext = React.createContext(contextValue);
 
-  console.log('---->: contextValue', contextValue)
-  return <Game />
-}
+  console.log("---->: contextValue", contextValue);
+  return <Game />;
+};
 
-export { RoomContext }
-export default SocketConnection
+export { RoomContext };
+export default SocketConnection;
