@@ -1,13 +1,15 @@
 import React, { useContext } from 'react'
 import { RoomContext } from './socketConnection'
 import { Box, Form, FormField, TextInput, Button, Heading } from 'grommet'
+import Spinner from './Spinner'
 
 const SelectRoom = () => {
   const {
+    isLoading,
     actions: { connectToRoom }
   } = useContext(RoomContext)
 
-  function onSubmit (e) {
+  function onSubmit(e) {
     e.preventDefault()
     const { roomName, userName } = e.target.elements
     connectToRoom(roomName.value, userName.value)
@@ -18,7 +20,7 @@ const SelectRoom = () => {
       <Heading alignSelf="center" margin={{ bottom: 'xlarge' }}>
         Make me Drink! 🍺
       </Heading>
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={isLoading ? null : onSubmit}>
         <FormField required name="roomName" htmlfor="roomName"
           label="Room name">
           <TextInput autoFocus id="roomName" name="roomName" />
@@ -28,7 +30,7 @@ const SelectRoom = () => {
           <TextInput id="userName" name="userName" />
         </FormField>
         <Box pad={{ top: 'xlarge' }} align="end">
-          <Button pad={{ top: 'large' }} type="submit" primary label="Submit" />
+          <Button pad={{ top: 'large' }} type='submit' primary label={isLoading ? 'Loading' : 'Submit'} icon={isLoading ? <Spinner /> : null} />
         </Box>
       </Form>
     </>

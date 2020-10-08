@@ -10,6 +10,7 @@ const SocketConnection = () => {
 
   const actions = {
     connectToRoom: (roomName, userName) => {
+      setRoomState({ ...roomState, isLoading: true })
       socket.current = socketIOClient(process.env.GATSBY_API_URL, {
         query: `roomName=${roomName}&userName=${userName}`
       })
@@ -46,6 +47,7 @@ const SocketConnection = () => {
     userId: null,
     room: null,
     isConnected: false,
+    isLoading: false,
     gameState: null,
     actions
   })
