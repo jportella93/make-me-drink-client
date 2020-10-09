@@ -49,7 +49,7 @@ const Stats = ({
           header: (
             <Text>Team</Text>
           ),
-          render: ({ name }) => <Box pad={{ left: 'small' }}>{name}</Box>
+          render: ({ name }) => <Box pad={{ left: 'small' }}>{name}</Box>,
           primary: true
         },
         {
