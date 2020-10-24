@@ -1,4 +1,4 @@
-# make-me-drink
+# Make me drink
 
 Front-end for online drinking game made with Gatsby, and web sockets.
 
