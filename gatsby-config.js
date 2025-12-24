@@ -5,8 +5,8 @@ module.exports = {
     author: 'Jon Portella'
   },
   plugins: [
-    'gatsby-optional-chaining',
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-image',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -19,11 +19,11 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'gatsby-starter-default',
-        short_name: 'starter',
+        name: 'Make me drink',
+        short_name: 'MakeMeDrink',
         start_url: '/',
-        background_color: '#663399',
-        theme_color: '#663399',
+        background_color: '#111111',
+        theme_color: '#111111',
         display: 'minimal-ui',
         icon: 'src/images/gatsby-icon.png' // This path is relative to the root of the site.
       }
