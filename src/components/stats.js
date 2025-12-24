@@ -10,7 +10,7 @@ const Stats = ({
     teams, users, room: { currentPlayingTeam, round, maxRounds }
   } = useContext(RoomContext)
 
-  const sortedTeams = teams.sort((a, b) =>
+  const sortedTeams = [...teams].sort((a, b) =>
     ((a[sortKey] > b[sortKey]) ? 1 : ((b[sortKey] > a[sortKey]) ? -1 : 0)))
 
   const getUserName = (id) => users.find(user => user.id === id).name
